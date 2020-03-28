@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import logoImg from '../../assets/logo.svg';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import './styles.css'
 import api from '../../services/api';
+import Modal from 'react-modal';
 
 export default function Register() {
     const [name, setName] = useState('');
@@ -11,9 +12,16 @@ export default function Register() {
     const [whatsapp, setWhatsapp] = useState('');
     const [city, setCity] = useState('');
     const [uf, setUf] = useState('');
+    const [idAcesso, setIdAcesso] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const history = useHistory();
+    function showModal() {
+        setIsModalOpen(true);
+    }
 
+    function hideModal() {
+        setIsModalOpen(false);
+    }
     async function handleRegister(e) {
         e.preventDefault(); 
 
@@ -26,9 +34,9 @@ export default function Register() {
         };
         try {
             const response = await api.post('ongs', data);
-            alert(`Seu ID de acesso: ${response.data.id}`);
-            history.push('/');
             
+            setIdAcesso(response.data.id);
+            showModal();
         } catch (error) {
             alert('Erro no cadastro, tente novamente');
         }
@@ -44,7 +52,7 @@ export default function Register() {
 
                     <Link className="back-link" to="/">
                         <FiArrowLeft size={16} color="#E02041" />
-                        Não tenho cadastro
+                        Fazer logon
                     </Link>
                 </section>
 
@@ -81,7 +89,26 @@ export default function Register() {
                     <button className="button" type="submit">Cadastrar</button>
                 </form>
             </div>
-
+            <Modal isOpen={isModalOpen} 
+                id="modalRegister" 
+                className="modalRegister">
+                    <header>
+                        <img src={logoImg} alt="Be the hero"></img>
+                    </header>
+                    <div className="idGroup">
+                        <h2>Seu ID de acesso é: </h2> 
+                        <strong>{idAcesso}</strong>
+                    </div>
+                <button 
+                    className="button" 
+                    style={{width: '50%'}} 
+                    type="submit"
+                    onClick={hideModal}
+                    >
+                        Fechar
+                </button>
+                </Modal>
         </div>
+
     );
 }
