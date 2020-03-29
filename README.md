@@ -1,9 +1,23 @@
 # BeTheHero
 
-BeTheHero é um app feito utilizando NodeJS,React.JS,e React Native
-durante a semana omnistack 11.0 da RocketSeat.
+BeTheHero is an application made using NodeJS, React.JS and React Native
+during RocketSeat's omnistack 11.0 week.
 
-O app tem o objetivo de ajudar ONG's que necessitam de capital
-para algum caso em específico...
-por esse app qualquer pessoa pode fazer sua doação para a ONG, sendo
-o herói do caso.
+The application aims to help NGOs that raise capital
+for some specific case ...
+through this application anyone can donate to an ONG, being
+the hero of the case.
+
+## Technologies
+
+I used ReactJS for frontend (Web), NodeJS for backend (API Restful) 
+and ReactNative for Mobile
+
+The main libraries: 
+- Express
+- Celebrate
+- Knex
+- Cors
+- Nodemon
+- Jest
+- Supertest
